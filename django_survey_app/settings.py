@@ -102,10 +102,18 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-try:
-    from django_survey_app.local_settings import *  # noqa: F403, F401
-except ImportError:
-    raise ImproperlyConfigured(
-        Fore.RED + "Create the required local_settings.py file"
-        ", check instructions for more details"
-    )
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# SECURITY WARNING: keep the secret key used in production secret!
+# DO NOT use this one for production!
+SECRET_KEY = '65y!t!=p%8wa674m-34p1v#!t!@45i!k85c1zz+w%+hv3jco)j'
+
+
+# Uncomment the following DATABASES block to use sqlite3
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
