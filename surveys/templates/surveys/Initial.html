@@ -1,0 +1,48 @@
+{% extends 'surveys/base.html' %}
+{% load static %}
+{% block content %}
+<div class="mdl-grid portfolio-max-width">
+  <form class="mdl-cell mdl-cell--12-col mdl-card mdl-shadow--4dp" method="POST">
+    {% csrf_token %}
+    <div class="mdl-card__title mdl-card--border">
+      <h2 class="mdl-card__title-text">What is the reason for the patient to visit?</h2>
+    </div>
+    <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+    <input list="symptom_list" name="selected">
+    <datalist id="symptom_list">
+      <script>
+        let array = {{ symptom_list | safe}};
+        let x='';
+        let symptom = ''
+        for (let i = 0; i < array.length; i++) {
+          console.log(array[i])
+          x = x + "<option value=" + array[i] + ">";
+        }
+      document.getElementById("symptom_list").innerHTML = x;
+      </script>
+    </datalist>
+    </body>
+    <div class="mdl-card__actions mdl-card--border">
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+        Submit
+      </button>
+    </div>
+  </form>
+  {% if error_message %}
+  <div id="error-toast" class="mdl-js-snackbar mdl-snackbar mdl-snackbar--active">
+    <div class="mdl-snackbar__text">{{ error_message }}</div>
+    <button class="mdl-snackbar__action" type="button"></button>
+  </div>
+  {% endif %}
+  {% if messages %}
+  {% for message in messages %}
+  <div id="info-toast" class="mdl-js-snackbar mdl-snackbar mdl-snackbar--active">
+    <div class="mdl-snackbar__text">{{ message | safe }}</div>
+  </div>
+  {% endfor %}
+  {% endif %}
+</div>
+{% endblock content %}

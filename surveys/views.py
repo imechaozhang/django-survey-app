@@ -2,8 +2,33 @@ from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect, render, reverse
 from django.views import View
+import json
+import pandas as pd
 
 from .models import Question
+from .diagnoseProcess import DiagnoseProcess
+
+
+class InitialView(View):
+    template_name = 'surveys/initial.html'
+
+    def render_invalid_post(self, request, error_message):
+        return render(request,
+                      self.template_name, {
+                          'error_message': error_message
+                      },
+                      status=400)
+
+    def get(self, request):
+        dp = DiagnoseProcess()
+        return render(request, self.template_name, {'symptom_list': json.dumps(list(dp.weight_matrix.columns))})
+
+    def post(self, request):
+        selected = request.POST.get('selected', '')
+        session_key = request.session.session_key
+        question = Question.objects.get_random(session_key)
+        question.question_text += selected
+        return render(request, 'surveys/index.html', {'question':question})
 
 
 class QuestionView(View):
