@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render, reverse
 from django.views import View
 import json
 import pandas as pd
+from django.utils import timezone
 
 from .models import Question
 from .diagnoseProcess import DiagnoseProcess
@@ -24,7 +25,8 @@ class InitialView(View):
 
     def post(self, request):
         selected = request.POST.get('selected', '')
-        request.session['init_symptom'] = selected
+        request.session['asked'] = [selected]
+        request.session['positive'] = [selected]
         return redirect(reverse('index'))
 
 
@@ -35,69 +37,43 @@ class QuestionView(View):
         super().__init__(**kwargs)
         self.dp = DiagnoseProcess()
 
-    def render_invalid_post(self, request, question, error_message):
-        return render(request,
-                      self.template_name, {
-                          'question': question,
-                          'error_message': error_message
-                      },
-                      status=400)
-
     def get(self, request):
-        selected = request.session.get('init_symptom')
-        self.dp.asked.append(selected)
-        self.dp.positive.append(selected)
+        asked = request.session.get('asked')
+        positive = request.session.get('positive')
+        self.dp.asked = asked
+        self.dp.positive = positive
         self.dp.reduce()
-        question = self.dp.next_symptom()
+
+        if self.dp.time_to_conclude():
+            diagnosis = self.dp.check()
+            request.session['diagnosis'] = diagnosis
+            request.session.flush()
+            messages.add_message(request, messages.INFO, 'Here we go again! 🚀')
+            return redirect(reverse('initial'))
+
+        symptom = self.dp.next_symptom()
+        question = Question(
+            question_text='Are you suffering from ' + str(symptom) + '? If yes, how severe is it?' + str(request.session.get('asked')),
+            pub_date=timezone.now())
+        question.save()
+        for t in ['Severe', 'Moderate', 'light', 'No']:
+            question.choices.create(choice_text=t)
         return render(request, self.template_name, {'question': question})
 
     def post(self, request):
-        choice_id = request.POST.get('choice', 0)
-        question_id = request.POST.get('question-id', 0)
+        asked = request.session.get('asked')
+        positive = request.session.get('positive')
+        self.dp.asked = asked
+        self.dp.positive = positive
+        self.dp.reduce()
+        symptom = self.dp.next_symptom()
 
-        if (question_id == 0):
-            # An invalid question id was sent, something is not right redirect to home
-            # TODO: Log that something is wrong
-            return redirect(reverse('index'))
-
-        try:
-            question = Question.objects.get(pk=question_id)
-        except ObjectDoesNotExist:
-            # The question might have been deleted before a submit
-            messages.add_message(
-                request, messages.WARNING,
-                'We are sorry, the question is no longer aviable, try this one'
-            )
-            return redirect(reverse('index'))
-
-        if (choice_id == 0):
-            # A choice was not selected
-            return self.render_invalid_post(request, question,
-                                            'Please select a choice')
-
-        try:
-            choice = question.choices.get(pk=choice_id)
-        except ObjectDoesNotExist:
-            return self.render_invalid_post(request, question,
-                                            'Please select a valid choice')
-
-        # If it is a guest user
-        if (request.user.is_anonymous):
-            # Make sure session exist
-            if not request.session.session_key:
-                request.session.save()
-
-            choice.answers.create(session_key=request.session.session_key)
-            messages.add_message(request, messages.SUCCESS,
-                                 'Your answer was saved')
-        else:
-            # If it's a register user, requirements does not specify what to do
-            messages.add_message(
-                request, messages.INFO, 'You are a registered user, '
-                'surveys are only for guest users right now '
-                '<a href="/admin/logout/">log out</a> if you want to add answers'
-            )
-
+        choice = request.POST.get('choice', '')
+        request.session['asked'].append(symptom)
+        if choice in ['Severe', 'Moderate', 'light']:
+            request.session['positive'].append(symptom)
+        request.session.save()
+        messages.add_message(request, messages.INFO, 'post')
         return redirect(reverse('index'))
 
 

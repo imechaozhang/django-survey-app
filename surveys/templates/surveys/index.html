@@ -14,7 +14,7 @@
         {% for choice in question.choices.all %}
         <li class="mdl-list__item">
           <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{ choice.id }}">
-            <input type="radio" id="{{ choice.id }}" class="mdl-radio__button" name="choice" value="{{ choice.id }}">
+            <input type="radio" id="{{ choice.id }}" class="mdl-radio__button" name="choice" value="{{ choice.choice_text }}">
             <span class="mdl-radio__label">{{ choice.choice_text }}</span>
           </label>
         </li>
