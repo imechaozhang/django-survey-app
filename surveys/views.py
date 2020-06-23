@@ -20,19 +20,20 @@ class InitialView(View):
                       status=400)
 
     def get(self, request):
-        dp = DiagnoseProcess()
-        return render(request, self.template_name, {'symptom_list': json.dumps(list(dp.weight_matrix.columns))})
+        return render(request, self.template_name, {'symptom_list': json.dumps(list(DiagnoseProcess.weight_matrix.columns))})
 
     def post(self, request):
         selected = request.POST.get('selected', '')
-        session_key = request.session.session_key
-        question = Question.objects.get_random(session_key)
-        question.question_text += selected
-        return render(request, 'surveys/index.html', {'question':question})
+        request.session['init_symptom'] = selected
+        return redirect(reverse('index'))
 
 
 class QuestionView(View):
     template_name = 'surveys/index.html'
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.dp = DiagnoseProcess()
 
     def render_invalid_post(self, request, question, error_message):
         return render(request,
@@ -43,8 +44,11 @@ class QuestionView(View):
                       status=400)
 
     def get(self, request):
-        session_key = request.session.session_key
-        question = Question.objects.get_random(session_key)
+        selected = request.session.get('init_symptom')
+        self.dp.asked.append(selected)
+        self.dp.positive.append(selected)
+        self.dp.reduce()
+        question = self.dp.next_symptom()
         return render(request, self.template_name, {'question': question})
 
     def post(self, request):
