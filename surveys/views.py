@@ -69,7 +69,6 @@ class QuestionView(View):
         if choice in ['Severe', 'Moderate', 'light']:
             request.session['positive'].append(symptom)
         request.session.save()
-        messages.add_message(request, messages.INFO, 'post')
         return redirect(reverse('index'))
 
 
