@@ -53,7 +53,7 @@ class QuestionView(View):
 
         symptom = self.dp.next_symptom()
         question = Question(
-            question_text='Are you suffering from ' + str(symptom) + '? If yes, how severe is it?' + str(request.session.get('asked')),
+            question_text='Are you suffering from ' + str(symptom) + '? If yes, how severe is it?',
             pub_date=timezone.now())
         question.save()
         for t in ['Severe', 'Moderate', 'light', 'No']:
