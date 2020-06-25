@@ -6,8 +6,8 @@ import json
 import pandas as pd
 from django.utils import timezone
 
-from .models import Question
-from .diagnoseProcess import DiagnoseProcess
+# from .models import Question
+from .diagnoseProcess import DiagnoseProcess, Question, Choice
 
 
 class InitialView(View):
@@ -53,11 +53,7 @@ class QuestionView(View):
 
         symptom = self.dp.next_symptom()
         question = Question(
-            question_text='Are you suffering from ' + str(symptom) + '? If yes, how severe is it?',
-            pub_date=timezone.now())
-        question.save()
-        for t in ['Severe', 'Moderate', 'light', 'No']:
-            question.choices.create(choice_text=t)
+            question_text='Are you suffering from ' + str(symptom) + '? If yes, how severe is it?')
         return render(request, self.template_name, {'question': question})
 
     def post(self, request):

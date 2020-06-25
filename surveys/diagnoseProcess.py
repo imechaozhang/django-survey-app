@@ -2,7 +2,7 @@ import pandas as pd
 from .models import Question
 
 
-class DiagnoseProcess():
+class DiagnoseProcess:
     filename = 'surveys/static/files/wm.csv'
     weight_matrix = pd.read_csv(filename, index_col=0)
 
@@ -61,3 +61,20 @@ class DiagnoseProcess():
 
         diagnosis_result.sort_values(ascending=False, inplace=True)
         return diagnosis_result
+
+
+class Question:
+    def __init__(self, question_text):
+        self.id = 0
+        self.question_text = question_text
+        self.choices = []
+        c = {1: 'Severe', 2: 'Moderate', 3: 'light', 4: 'No'}
+
+        for k, v in c.items():
+            self.choices.append(Choice(choice_id=k, choice_text=v))
+
+
+class Choice:
+    def __init__(self, choice_id, choice_text):
+        self.id = choice_id
+        self.choice_text = choice_text

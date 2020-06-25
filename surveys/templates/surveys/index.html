@@ -11,7 +11,7 @@
     </div>
     <div class="mdl-card__supporting-text no-vertical-padding">
       <ul class="choice-list-control mdl-list">
-        {% for choice in question.choices.all %}
+        {% for choice in question.choices %}
         <li class="mdl-list__item">
           <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{ choice.id }}">
             <input type="radio" id="{{ choice.id }}" class="mdl-radio__button" name="choice" value="{{ choice.choice_text }}">
