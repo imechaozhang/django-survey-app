@@ -52,5 +52,12 @@ class DiagnoseProcess():
             symptom_list[symp] = 1
 
         diagnosis_result = self.weight_matrix.dot(symptom_list)
+        s = sum(diagnosis_result)
+        for key in diagnosis_result.index:
+            if diagnosis_result.loc[key] == 0:
+                diagnosis_result.drop(key, inplace=True)
+            else:
+                diagnosis_result.loc[key] = round(diagnosis_result.loc[key]/s, 2)
+
         diagnosis_result.sort_values(ascending=False, inplace=True)
         return diagnosis_result

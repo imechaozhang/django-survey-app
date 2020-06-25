@@ -48,8 +48,8 @@ class QuestionView(View):
             diagnosis = self.dp.check()
             request.session['diagnosis'] = diagnosis
             request.session.flush()
-            messages.add_message(request, messages.INFO, 'Here we go again! 🚀')
-            return redirect(reverse('initial'))
+            messages.add_message(request, messages.INFO, 'Here is your diagnosis')
+            return render(request, 'surveys/conclude.html', {'diagnosis': dict(diagnosis)})
 
         symptom = self.dp.next_symptom()
         question = Question(
@@ -80,7 +80,7 @@ class QuestionView(View):
 def restart(request):
     request.session.flush()
     messages.add_message(request, messages.INFO, 'Here we go again! 🚀')
-    return redirect(reverse('index'))
+    return redirect(reverse('initial'))
 
 
 def about(request):

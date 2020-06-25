@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Amazing surveys questions, are you ready to answer?">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>Django Surveys</title>
+    <title>MEAD System</title>
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-light_blue.min.css" />
@@ -23,7 +23,6 @@
                 <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
                     <a class="mdl-navigation__link {% ifequal request.path index %} is-active {% endifequal %}" href="{{ index }}">Survey</a>
                     <a class="mdl-navigation__link {% ifequal request.path about %} is-active {% endifequal %}" href="{{ about }}">About</a>
-                    <a class="mdl-navigation__link" href="https://luispalacios.ninja/blog" target="_blank">Blog</a>
                 </nav>
             </div>
         </header>
@@ -31,7 +30,6 @@
             <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
                 <a class="mdl-navigation__link {% ifequal request.path index %} is-active {% endifequal %}" href="{{index}}">Survey</a>
                 <a class="mdl-navigation__link {% ifequal request.path about %} is-active {% endifequal %}" href="{{about}}">About</a>
-                <a class="mdl-navigation__link" href="https://luispalacios.ninja/blog" target="_blank">Blog</a>
             </nav>
         </div>
         <main class="mdl-layout__content">
