@@ -106,6 +106,11 @@ STATIC_URL = "/static/"
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    #'django.contrib.staticfiles.finders.AppDirectoriesFinder',    #causes verbose duplicate notifications in django 1.9
+)
+
 # SECURITY WARNING: keep the secret key used in production secret!
 # DO NOT use this one for production!
 SECRET_KEY = '65y!t!=p%8wa674m-34p1v#!t!@45i!k85c1zz+w%+hv3jco)j'

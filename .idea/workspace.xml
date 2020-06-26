@@ -38,7 +38,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09e3ce59-5905-4cca-9521-5481fc0fc0b8" name="Default Changelist" comment="minor changes">
+    <list default="true" id="09e3ce59-5905-4cca-9521-5481fc0fc0b8" name="Default Changelist" comment="test commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/django_survey_app/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_survey_app/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -150,6 +152,9 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="requirements.txt" />
+  </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
       <list>
@@ -184,26 +189,30 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="414" y="180" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1593125360468" />
+    <state x="690" y="272" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1593138170483">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="690" y="272" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1593138170483" />
     <state x="740" y="280" key="FileChooserDialogImpl" timestamp="1593125261185">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="740" y="280" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1593125261185" />
-    <state width="1877" height="285" key="GridCell.Tab.0.bottom" timestamp="1593129264339">
+    <state width="1877" height="285" key="GridCell.Tab.0.bottom" timestamp="1593140465772">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1593129264339" />
-    <state width="1877" height="285" key="GridCell.Tab.0.center" timestamp="1593129264339">
+    <state width="1877" height="285" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1593140465772" />
+    <state width="1877" height="285" key="GridCell.Tab.0.center" timestamp="1593140465772">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1593129264339" />
-    <state width="1877" height="285" key="GridCell.Tab.0.left" timestamp="1593129264339">
+    <state width="1877" height="285" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1593140465772" />
+    <state width="1877" height="285" key="GridCell.Tab.0.left" timestamp="1593140465772">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1593129264339" />
-    <state width="1877" height="285" key="GridCell.Tab.0.right" timestamp="1593129264339">
+    <state width="1877" height="285" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1593140465772" />
+    <state width="1877" height="285" key="GridCell.Tab.0.right" timestamp="1593140465772">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1593129264339" />
+    <state width="1877" height="285" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1593140465772" />
     <state width="1877" height="352" key="GridCell.Tab.1.bottom" timestamp="1593128486961">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
