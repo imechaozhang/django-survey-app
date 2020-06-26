@@ -21,14 +21,14 @@
             {% url 'index' as index %}
             <div class="mdl-layout__header-row portfolio-navigation-row mdl-layout--large-screen-only">
                 <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
-                    <a class="mdl-navigation__link {% ifequal request.path index %} is-active {% endifequal %}" href="{{ index }}">Questions</a>
+                    <a class="mdl-navigation__link {% ifequal request.path index %} is-active {% endifequal %}" href="{{ initial }}">Questions</a>
                     <a class="mdl-navigation__link {% ifequal request.path about %} is-active {% endifequal %}" href="{{ about }}">About</a>
                 </nav>
             </div>
         </header>
         <div class="mdl-layout__drawer mdl-layout--small-screen-only">
             <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
-                <a class="mdl-navigation__link {% ifequal request.path index %} is-active {% endifequal %}" href="{{index}}">Questions</a>
+                <a class="mdl-navigation__link {% ifequal request.path index %} is-active {% endifequal %}" href="{{initial}}">Questions</a>
                 <a class="mdl-navigation__link {% ifequal request.path about %} is-active {% endifequal %}" href="{{about}}">About</a>
             </nav>
         </div>
